@@ -9,6 +9,7 @@ describe('User Service Pact', () => {
     const provider = new PactWrapper('api-identifier');
 
     beforeAll(async () => {
+        jest.setTimeout(30000); //TODO better in config file?
         await provider.init();
     });
 
