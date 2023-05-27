@@ -15,7 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @PactFolder("pacts")
 class UserServiceVerificationTest {
 
-    @State({"provider accepts a new user", "user 42 exists", "user 1 exists"})
+    @State({"provider accepts a new user", "user 42 exists", "user 1 exists", "users one and two exist"})
     void toDefaultState() {
 
     }

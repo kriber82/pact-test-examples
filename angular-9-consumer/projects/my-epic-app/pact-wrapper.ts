@@ -1,9 +1,9 @@
 import { Pact, Interaction, InteractionObject } from '@pact-foundation/pact';
 import * as path from 'path';
- 
+
 export class PactWrapper {
     private readonly provider: Pact;
- 
+
     constructor(uniqueNameOfMyProvider: string) {
         this.provider = new Pact({
             port: 8181,
@@ -15,7 +15,7 @@ export class PactWrapper {
             provider: uniqueNameOfMyProvider
         });
     }
- 
+
     async init(): Promise<void> {
         try {
             await this.provider.setup();
@@ -23,7 +23,15 @@ export class PactWrapper {
             console.error(error);
         }
     }
- 
+
+  async addInteraction(interaction: Interaction | InteractionObject): Promise<void> {
+    try {
+      await this.provider.addInteraction(interaction);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
     async verify(): Promise<void> {
         try {
             await this.provider.verify();
@@ -31,7 +39,7 @@ export class PactWrapper {
             console.error(error);
         }
     }
- 
+
     async finalize(): Promise<void> {
         try {
             await this.provider.finalize();
@@ -39,12 +47,5 @@ export class PactWrapper {
             console.error(error);
         }
     }
- 
-    async addInteraction(interaction: Interaction | InteractionObject): Promise<void> {
-        try {
-            await this.provider.addInteraction(interaction);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+
 }
